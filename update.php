@@ -14,6 +14,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$changes = false;
 
 foreach ($_POST['wochenenden'] as $tag => $value){
     #echo "Datum : " . $tag . "<br>";
@@ -26,6 +27,7 @@ foreach ($_POST['wochenenden'] as $tag => $value){
 	$oldValueResult = $oldValueResult->fetch_assoc();
 	$oldValue = $oldValueResult[$ort];
 	if ($inputValue != $oldValue) {
+	    $changes = true;
 	    $sqlUpdate = "UPDATE wochenenden SET " . $ort . "='" . $inputValue . "' WHERE tag='" . $tag . "';";
 	    if ($conn->query($sqlUpdate) === TRUE) {
 	        #echo "Record updated successfully";
@@ -55,6 +57,7 @@ foreach ($_POST['ferien'] as $tag => $value){
         $oldValueResult = $oldValueResult->fetch_assoc();
         $oldValue = $oldValueResult[$ort];
         if ($inputValue != $oldValue) {
+	    $changes = true;
             $sqlUpdate = "UPDATE ferien SET " . $ort . "='" . $inputValue . "' WHERE tag='" . $tag . "';";
             if ($conn->query($sqlUpdate) === TRUE) {
                 #echo "Record updated successfully";
@@ -72,19 +75,11 @@ foreach ($_POST['ferien'] as $tag => $value){
     }
 }
 
-
-
-
-
-echo "Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen."
-
-
-
-
-
-
-
-
+if ($changes == true) {
+    echo "Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen.";
+} else {
+    echo "Es wurden keine Änderungen vorgenommen. Du kannst dich <a href='index.php'>hier</a> eintragen.";
+}
 
 
 
