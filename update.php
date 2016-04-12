@@ -25,19 +25,19 @@ if ($conn->connect_error) {
 
 $changes = false;
 
-foreach ($_POST['wochenenden'] as $tag => $value){
+foreach ($_POST['tage'] as $tag => $value){
     #echo "Datum : " . $tag . "<br>";
     foreach($value as $ort => $inputValue){
 	#echo "Ort         : " . $ort . "<br>";
 	#echo "Input Value : " . $inputValue . "<br>";
 
-	$selectSql = "SELECT " . $ort . " FROM wochenenden where tag='" . $tag . "';";
+	$selectSql = "SELECT " . $ort . " FROM tage where tag='" . $tag . "';";
 	$oldValueResult = $conn->query($selectSql);
 	$oldValueResult = $oldValueResult->fetch_assoc();
 	$oldValue = $oldValueResult[$ort];
 	if ($inputValue != $oldValue) {
 	    $changes = true;
-	    $sqlUpdate = "UPDATE wochenenden SET " . $ort . "='" . $inputValue . "' WHERE tag='" . $tag . "';";
+	    $sqlUpdate = "UPDATE tage SET " . $ort . "='" . $inputValue . "' WHERE tag='" . $tag . "';";
 	    if ($conn->query($sqlUpdate) === TRUE) {
 	        #echo "Record updated successfully";
 	    } else {
@@ -54,7 +54,7 @@ foreach ($_POST['wochenenden'] as $tag => $value){
     }
 }
 
-
+/*
 foreach ($_POST['ferien'] as $tag => $value){
     #echo "Datum : " . $tag . "<br>";
     foreach($value as $ort => $inputValue){
@@ -83,6 +83,8 @@ foreach ($_POST['ferien'] as $tag => $value){
         }
     }
 }
+*/
+
 
 if ($changes == true) {
     echo "Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen.";
