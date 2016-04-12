@@ -1,3 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+<center>
+
+
 <?php
 
 $settings = parse_ini_file("settings.ini", TRUE);
@@ -15,19 +27,23 @@ if ($conn->connect_error) {
 } 
 //echo "Connected successfully";
 
-
-
+setlocale (LC_ALL, 'de_DE');
 
 echo "<form action='update.php' method='post' >";
+
+if ($_GET['mode'] != 'view'){
+    echo "<input type='submit' value='Speichern'>";
+}
+
 echo "<table>";
-echo "<tr><td colspan=4>Dienstplan Wochenenden</td></tr>";
+echo "<tr><td colspan=5>Dienstplan Wochenenden</td></tr>";
 echo "<tr><td>Datum</td><td>Textil 1</td><td>Textil 2</td><td>FKK 1</td><td>FKK 2</td></tr>";
 if ($result = $conn->query("SELECT * FROM wochenenden order by tag")) {
  #   printf("Select returned %d rows.\n", $result->num_rows);
     $result->data_seek(0);
     while ($row = $result->fetch_assoc()) {
 	echo "<tr>";
-        echo "<td>" . $row['tag'] . "</td>";
+        echo "<td>" .strftime("%A, %d.%m.%Y", strtotime($row['tag'])) . "</td>";
 	if ($_GET['mode'] == 'view'){
 	    echo "<td>" . $row['textil1'] . "</td>";
             echo "<td>" . $row['textil2'] . "</td>";
@@ -55,14 +71,14 @@ echo "<hr>";
 
 
 echo "<table>";
-echo "<tr><td colspan=4>Dienstplan Ferien</td></tr>";
+echo "<tr><td colspan=5>Dienstplan Ferien</td></tr>";
 echo "<tr><td>Datum</td><td>Textil 1</td><td>Textil 2</td><td>FKK 1</td><td>FKK 2</td></tr>";
 if ($result = $conn->query("SELECT * FROM ferien order by tag")) {
 #   printf("Select returned %d rows.\n", $result->num_rows);
     $result->data_seek(0);
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row['tag'] . "</td>";
+        echo "<td>" .strftime("%A, %d.%m.%Y", strtotime($row['tag'])) . "</td>";
 	if ($_GET['mode'] == 'view'){
             echo "<td>" . $row['textil1'] . "</td>";
             echo "<td>" . $row['textil2'] . "</td>";
@@ -95,3 +111,8 @@ echo "</form>";
 
 
 ?>
+
+</center>
+
+</body>
+</html>

@@ -1,3 +1,12 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
 <?php
 
 $settings = parse_ini_file("settings.ini", TRUE);
@@ -84,4 +93,5 @@ if ($changes == true) {
 
 
 ?>
-
+</body>
+</html>

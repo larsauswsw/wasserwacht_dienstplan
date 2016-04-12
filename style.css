@@ -1,0 +1,9 @@
+table,tr,td {
+   border: 1px solid black;
+}
+table {border-collapse: collapse;}
+td    {padding: 6px;}
+table > tbody > tr:nth-child(1) > td {
+  text-align: center;
+  font-weight: bold;
+}

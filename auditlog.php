@@ -1,3 +1,12 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
 <?php
 
 $settings = parse_ini_file("settings.ini", TRUE);
@@ -38,3 +47,7 @@ if ($result = $conn->query("SELECT * FROM auditlog order by zeitpunkt DESC")) {
 echo "</table>";
 
 ?>
+
+</body>
+</html>
+
