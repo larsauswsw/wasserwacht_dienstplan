@@ -6,9 +6,17 @@ td    {padding: 6px;}
 table > tbody > tr:nth-child(1) > td {
   text-align: center;
   font-weight: bold;
+  background-color: #B2D1E3;
 }
+
+table > tbody > tr:nth-child(2) > td {
+  background-color: #B2D1E3;
+}
+
+
 td.wochenende {
-  background-color: #4CAF50;
+/*  background-color: #0066A2;*/
+  background-color: #B2D1E3;
 }
 
 td.sonntag, td.feiertag {
