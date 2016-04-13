@@ -4,8 +4,14 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
+  <center>
+  <h1>Dienstplan Halbendorf 2016</h1>
+
 
 <?php
 
@@ -87,13 +93,14 @@ foreach ($_POST['ferien'] as $tag => $value){
 
 
 if ($changes == true) {
-    echo "Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen.";
+    echo "<div class='alert alert-success'>Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen.</div>";
 } else {
-    echo "Es wurden keine Änderungen vorgenommen. Du kannst dich <a href='index.php'>hier</a> eintragen.";
+echo "<div class='alert alert-info'>Es wurden keine Änderungen vorgenommen. Du kannst dich <a href='index.php'>hier</a> eintragen.</div>";
 }
 
 
 
 ?>
+</center>
 </body>
 </html>

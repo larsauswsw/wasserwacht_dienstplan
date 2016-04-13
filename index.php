@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </head>
-  <body>
+<body>
 
 <center>
-
+<h1>Dienstplan Halbendorf 2016</h1>
 
 <?php
 
@@ -32,7 +35,9 @@ setlocale (LC_ALL, 'de_DE');
 echo "<form action='update.php' method='post' >";
 
 if ($_GET['mode'] != 'view'){
-    echo "<input type='submit' value='Speichern'>";
+    echo "<div class='alert alert-danger alert-block'><strong>ACHTUNG!</strong> Ungespeicherte Änderungen (gelb hinterlegt) gehen verloren, wenn die Seite ohne Speichern verlassen wird. Bitte auf &quot;&Auml;nderungen speichern&quot; klicken.</div>";
+    echo "<input type='submit' value='Änderungen speichern' class='btn btn-large btn btn-danger '>";
+    echo "<br><br>";
 }
 
 echo "<table>";
@@ -62,10 +67,10 @@ if ($result = $conn->query("SELECT * FROM tage order by tag")) {
             echo "<td>" . $row['fkk1'] . "</td>";
             echo "<td>" . $row['fkk2'] . "</td>";
 	} else {
-	    echo "<td><input name='tage[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
-	    echo "<td><input name='tage[" . $row['tag'] . "][textil2]' value='" . $row['textil2'] . "' maxlength='255'></td>";
-	    echo "<td><input name='tage[" . $row['tag'] . "][fkk1]' value='" . $row['fkk1'] . "' maxlength='255'></td>";
-	    echo "<td><input name='tage[" . $row['tag'] . "][fkk2]' value='" . $row['fkk2'] . "' maxlength='255'></td>";
+	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
+	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil2]' value='" . $row['textil2'] . "' maxlength='255'></td>";
+	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk1]' value='" . $row['fkk1'] . "' maxlength='255'></td>";
+	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk2]' value='" . $row['fkk2'] . "' maxlength='255'></td>";
 	}
 	echo "</tr>";
     }
@@ -125,6 +130,16 @@ echo "</form>";
 ?>
 
 </center>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    $( 'input[type="text"]' ).on('propertychange input', function (e) {
+	$(e.target).addClass( "changed" ); ;
+    });
+});
+</script>
+
+
 
 </body>
 </html>
