@@ -41,8 +41,8 @@ if ($_GET['mode'] != 'view'){
 }
 
 echo "<table>";
-echo "<tr><td colspan=5>Dienstplan Wochenenden</td></tr>";
-echo "<tr><td><b>Datum:</b></td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Bronze/ 18 Jahre</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Bronze/ 18 Jahre</td></tr>";
+echo "<tr><td colspan=5>Dienstplan Halbendorf</td></tr>";
+echo "<tr><td><b>Datum:</b></td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td></tr>";
 if ($result = $conn->query("SELECT * FROM tage order by tag")) {
  #   printf("Select returned %d rows.\n", $result->num_rows);
     $result->data_seek(0);
