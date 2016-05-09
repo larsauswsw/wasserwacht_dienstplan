@@ -37,7 +37,7 @@ $changes = false;
 $email_body = "Hallo,\n\nes gibt neue Änderungen im Dienstplan:\n\nTag - Ort - Alter Wert - Neuer Wert\n";
 $email_header = "From: Lars Miesner <" . $email_from . ">\r\n";
 $email_header .= "Mime-Version: 1.0\r\n";
-$email_header .= "Content-type: text/plain; charset=utf-8";
+$email_header .= "Content-type:text/html;charset=UTF-8";
 
 foreach ($_POST['tage'] as $tag => $value){
     #echo "Datum : " . $tag . "<br>";
