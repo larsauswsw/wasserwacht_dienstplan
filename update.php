@@ -34,7 +34,7 @@ if ($conn->connect_error) {
 }
 
 $changes = false;
-$email_body = "Hallo,\n\nes gibt neue Änderungen im Dienstplan:\n\nTag - Ort - Alter Wert - Neuer Wert\n";
+$email_body = "Hallo,<br><br>es gibt neue Änderungen im Dienstplan:<br><br><table><tr><td>Tag</td><td>Ort</td><td>Alter Wert</td><td>Neuer Wert</td></tr>";
 $email_header = "From: Lars Miesner <" . $email_from . ">\r\n";
 $email_header .= "Mime-Version: 1.0\r\n";
 $email_header .= "Content-type:text/html;charset=UTF-8";
@@ -57,7 +57,7 @@ foreach ($_POST['tage'] as $tag => $value){
 	    } else {
 	        exit("Fehler beim Speichern der Daten: " . $conn->error);
 	    }
-	    $email_body .= " - ". $tag . " - " . $ort . " - " . $oldValue . " - " . $inputValue . "\n"; 
+	    $email_body .= "<tr><td>". $tag . "</td><td>" . $ort . "</td><td>" . $oldValue . "</td><td>" . $inputValue . "</td></tr>"; 
 	    $sqlInsert = "INSERT INTO auditlog (tag,ort,alter_wert,neuer_wert,zeitpunkt) VALUES ('". $tag . "','" . $ort . "','" . $oldValue . "','" . $inputValue . "',NOW());";
             if ($conn->query($sqlInsert) === TRUE) {
                 #echo "Record updated successfully";
@@ -71,7 +71,7 @@ foreach ($_POST['tage'] as $tag => $value){
 
 if ($changes == true) {
     echo "<div class='alert alert-success'>Deine Daten wurden erfolgreich eingetragen. Du kannst sie dir <a href='index.php?mode=view'>hier</a> ansehen.</div>";
-
+    $email_body .= "</table>";
     mail($email_to,$email_subject,$email_body, $email_header);
 
 } else {
