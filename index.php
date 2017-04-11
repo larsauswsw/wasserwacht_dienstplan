@@ -54,7 +54,7 @@ if ($result = $conn->query("SELECT * FROM tage order by tag")) {
 	if (date('N', strtotime($row['tag'])) == 7){
             $class = $class . " sonntag";
         }
-	if ($row['tag'] == '2016-05-16' ){
+	if ($row['tag'] == '2017-06-05' ){
             $class = $class . " feiertag";
         }
 
