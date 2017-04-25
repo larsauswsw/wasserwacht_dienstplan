@@ -36,6 +36,7 @@ echo "<form action='update.php' method='post' >";
 
 if ($_GET['mode'] != 'view'){
     echo "<div class='alert alert-danger alert-block'><strong>ACHTUNG!</strong> Ungespeicherte Änderungen (gelb hinterlegt) gehen verloren, wenn die Seite ohne Speichern verlassen wird. Bitte auf &quot;&Auml;nderungen speichern&quot; klicken.</div>";
+    echo "<div class='alert alert-danger alert-block'><strong>ACHTUNG!</strong> Nachträgliche Änderungen/Löschungen k&ouml;nnen nur noch durch einen Admnistrator (Karin/Steffen) durchgef&uuml;hrt werden.</div>";
     echo "<input type='submit' value='Änderungen speichern' class='btn btn-large btn btn-danger '>";
     echo "<br><br>";
 }
@@ -67,10 +68,29 @@ if ($result = $conn->query("SELECT * FROM tage order by tag")) {
             echo "<td>" . $row['fkk1'] . "</td>";
             echo "<td>" . $row['fkk2'] . "</td>";
 	} else {
-	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
-	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil2]' value='" . $row['textil2'] . "' maxlength='255'></td>";
-	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk1]' value='" . $row['fkk1'] . "' maxlength='255'></td>";
-	    echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk2]' value='" . $row['fkk2'] . "' maxlength='255'></td>";
+        if (empty($row['textil1']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
+            echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
+        } else {
+            echo "<td>" . $row['textil1'] . "</td>";
+        }
+
+        if (empty($row['textil2']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
+            echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil2]' value='" . $row['textil2'] . "' maxlength='255'></td>";
+        } else {
+            echo "<td>" . $row['textil2'] . "</td>";
+        }
+
+        if (empty($row['fkk1']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
+            echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk1]' value='" . $row['fkk1'] . "' maxlength='255'></td>";
+        } else {
+            echo "<td>" . $row['fkk1'] . "</td>";
+        }
+
+        if (empty($row['fkk2']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
+            echo "<td><input type='text' name='tage[" . $row['tag'] . "][fkk2]' value='" . $row['fkk2'] . "' maxlength='255'></td>";
+        } else {
+            echo "<td>" . $row['fkk2'] . "</td>";
+        }
 	}
 	echo "</tr>";
     }
@@ -81,51 +101,9 @@ if ($result = $conn->query("SELECT * FROM tage order by tag")) {
 echo "</table>";
 
 if ($_GET['mode'] != 'view'){
-    echo "<input type='submit' value='Speichern'>";
+    echo "<br>";
+    echo "<input type='submit' value='Änderungen speichern' class='btn btn-large btn btn-danger '>";
 }
-
-/*
-echo "<hr>";
-
-
-echo "<table>";
-echo "<tr><td colspan=5>Dienstplan Ferien</td></tr>";
-echo "<tr><td>Datum</td><td>Textil 1</td><td>Textil 2</td><td>FKK 1</td><td>FKK 2</td></tr>";
-if ($result = $conn->query("SELECT * FROM ferien order by tag")) {
-#   printf("Select returned %d rows.\n", $result->num_rows);
-    $result->data_seek(0);
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" .strftime("%A, %d.%m.%Y", strtotime($row['tag'])) . "</td>";
-	if ($_GET['mode'] == 'view'){
-            echo "<td>" . $row['textil1'] . "</td>";
-            echo "<td>" . $row['textil2'] . "</td>";
-            echo "<td>" . $row['fkk1'] . "</td>";
-            echo "<td>" . $row['fkk2'] . "</td>";
-        } else {
-            echo "<td><input name='ferien[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
-            echo "<td><input name='ferien[" . $row['tag'] . "][textil2]' value='" . $row['textil2'] . "' maxlength='255'></td>";
-            echo "<td><input name='ferien[" . $row['tag'] . "][fkk1]' value='" . $row['fkk1'] . "' maxlength='255'></td>";
-            echo "<td><input name='ferien[" . $row['tag'] . "][fkk2]' value='" . $row['fkk2'] . "' maxlength='255'></td>";
-        }
-	echo "</tr>";
-    }
-
-    $result->close();
-}
-echo "</table>";
-
-
-
-
-if ($_GET['mode'] != 'view'){
-    echo "<input type='submit' value='Speichern'>";
-}
-echo "</form>";
-
-*/
-
-
 
 ?>
 
