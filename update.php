@@ -45,7 +45,7 @@ foreach ($_POST['tage'] as $tag => $value){
 	#echo "Ort         : " . $ort . "<br>";
 	#echo "Input Value : " . $inputValue . "<br>";
 
-	$selectSql = "SELECT " . $ort . " FROM tage where tag='" . $tag . "';";
+	$selectSql = "SELECT " . $ort . " FROM tage where archiv=false and tag='" . $tag . "';";
 	$oldValueResult = $conn->query($selectSql);
 	$oldValueResult = $oldValueResult->fetch_assoc();
 	$oldValue = $oldValueResult[$ort];

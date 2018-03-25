@@ -44,7 +44,7 @@ if ($_GET['mode'] != 'view'){
 echo "<table>";
 echo "<tr><td colspan=5>Dienstplan Halbendorf</td></tr>";
 echo "<tr><td><b>Datum:</b></td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td></tr>";
-if ($result = $conn->query("SELECT * FROM tage order by tag")) {
+if ($result = $conn->query("SELECT * FROM tage WHERE archiv = False order by tag")) {
  #   printf("Select returned %d rows.\n", $result->num_rows);
     $result->data_seek(0);
     while ($row = $result->fetch_assoc()) {
@@ -55,7 +55,7 @@ if ($result = $conn->query("SELECT * FROM tage order by tag")) {
 	if (date('N', strtotime($row['tag'])) == 7){
             $class = $class . " sonntag";
         }
-	if ($row['tag'] == '2017-06-05' ){
+	if ($row['tag'] == '2018-05-21' ){
             $class = $class . " feiertag";
         }
 
