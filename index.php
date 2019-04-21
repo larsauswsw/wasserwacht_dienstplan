@@ -11,7 +11,7 @@
 <body>
 
 <center>
-<h1>Dienstplan Halbendorf 2017</h1>
+<h1>Dienstplan Halbendorf 2019</h1>
 
 <?php
 
@@ -55,7 +55,7 @@ if ($result = $conn->query("SELECT * FROM tage WHERE archiv = False order by tag
 	if (date('N', strtotime($row['tag'])) == 7){
             $class = $class . " sonntag";
         }
-	if ($row['tag'] == '2018-05-21' ){
+	if ($row['tag'] == '2019-06-10' ){
             $class = $class . " feiertag";
         }
 
