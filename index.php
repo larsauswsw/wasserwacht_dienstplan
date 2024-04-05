@@ -11,7 +11,7 @@
 <body>
 
 <center>
-<h1>Dienstplan Halbendorf 2023</h1>
+<h1>Dienstplan Halbendorf 2024</h1>
 
 <?php
 
