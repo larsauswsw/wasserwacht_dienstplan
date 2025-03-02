@@ -11,7 +11,7 @@
 <body>
 
 <center>
-<h1>Dienstplan Halbendorf 2024</h1>
+<h1>Dienstplan Halbendorf/Reichenbach 2025</h1>
 
 <?php
 
@@ -42,8 +42,15 @@ if ($_GET['mode'] != 'view'){
 }
 
 echo "<table>";
-echo "<tr><td colspan=5>Dienstplan Halbendorf</td></tr>";
-echo "<tr><td><b>Datum:</b></td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>Textil</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td><td><b>FKK</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td></tr>";
+echo "<tr><td>&nbsp;</td><td colspan=4>Dienstplan Halbendorf</td><td>Dienstplan Reichenbach</td></tr>";
+echo "<tr><td><b>Datum:</b></td>";
+echo "<td><b>Textil</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td>";
+echo "<td><b>Textil</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td>";
+echo "<td><b>FKK</b><br>Rettungsschwimmer<br>mind. Silber/ 18 Jahre</td>";
+echo "<td><b>FKK</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td>";
+
+echo "<td><b>Freibad</b><br>Rettungsschwimmer<br>mind. Bronze/ Sani&auml;tsausbildung</td>";
+echo "</tr>";
 if ($result = $conn->query("SELECT * FROM tage WHERE archiv = False order by tag")) {
  #   printf("Select returned %d rows.\n", $result->num_rows);
     $result->data_seek(0);
@@ -67,6 +74,7 @@ if ($result = $conn->query("SELECT * FROM tage WHERE archiv = False order by tag
             echo "<td>" . $row['textil2'] . "</td>";
             echo "<td>" . $row['fkk1'] . "</td>";
             echo "<td>" . $row['fkk2'] . "</td>";
+            echo "<td>" . $row['reichenbach'] . "</td>";
 	} else {
         if (empty($row['textil1']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
             echo "<td><input type='text' name='tage[" . $row['tag'] . "][textil1]' value='" . $row['textil1'] . "' maxlength='255'></td>";
@@ -91,6 +99,13 @@ if ($result = $conn->query("SELECT * FROM tage WHERE archiv = False order by tag
         } else {
             echo "<td>" . $row['fkk2'] . "</td>";
         }
+
+	if (empty($row['reichenbach']) || $_SERVER['PHP_AUTH_USER'] == 'admin') {
+            echo "<td><input type='text' name='tage[" . $row['tag'] . "][reichenbach]' value='" . $row['reichenbach'] . "' maxlength='255'></td>";
+        } else {
+            echo "<td>" . $row['reichenbach'] . "</td>";
+        }
+
 	}
 	echo "</tr>";
     }
